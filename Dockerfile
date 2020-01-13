@@ -35,9 +35,13 @@ COPY --from=builder /build/sensu-go/bin/sensu-agent /usr/local/bin/sensu-agent
 COPY --from=builder /build/sensu-go/bin/sensu-backend /usr/local/bin/sensu-backend
 COPY --from=builder /build/sensu-go/bin/sensuctl /usr/local/bin/sensuctl
 
-RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache \
+    ca-certificates \
+    dumb-init
 
 WORKDIR /
 VOLUME /var/lib/sensu
 EXPOSE 2379 2380 8080 8081 3000
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["sensu-backend"]
