@@ -6,7 +6,7 @@ ENV GOARCH "amd64"
 ENV CGO_ENABLED "0"
 
 WORKDIR /build
-RUN git clone --single-branch --branch v${SENSU_VERSION} https://github.com/sensu/sensu-go.git
+RUN git clone --depth=1 --single-branch --branch v${SENSU_VERSION} https://github.com/sensu/sensu-go.git
 
 WORKDIR /build/sensu-go
 RUN go mod tidy
