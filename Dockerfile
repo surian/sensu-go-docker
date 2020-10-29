@@ -1,4 +1,4 @@
-FROM golang:latest AS builder
+FROM golang:1.13.15 AS builder
 
 ARG SENSU_VERSION
 ENV GOOS "linux"
